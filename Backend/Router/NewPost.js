@@ -4,50 +4,101 @@ const NewPost = require('../Schema/Post');
 const cloudinary = require('cloudinary').v2;
 
 cloudinary.config({
-    cloud_name: 'dewxmgs8r',
-    api_key: '243536242914815',
-    api_secret: 'Q2YzGuRccpG6Xckof7JAqI1TGOA'
+    cloud_name: process.env.cloud_name,
+    api_key: process.env.api_key,
+    api_secret: process.env.api_secret
 });
 
 router.get('/post', (req, res) => {
     NewPost.find({})
-    .then(data => {
-        res.json({value: data})
-    })
-    .catch(error => {
-        res.json({message: 'Error, Please try again...'})
-    })
+        .then(data => {
+            res.json({ value: data })
+        })
+        .catch(error => {
+            res.json({ message: 'Error, Please try again...' })
+        })
 
 
 })
 
-router.post('/post', (req, res) => {
-    cloudinary.uploader.upload(req.body.img, (err, result) => {
-        console.log(result, err)
-    })
-    /* const AddNewPost = new NewPost({
+const AddTitleImg = (req, result) => {
+    const AddNewPost = new NewPost({
         title: req.body.title,
-        img: req.body.img,
+        img: result.secure_url,
         date: Date.now(),
         author: req.body.author,
         authorName: req.body.authorName,
         visibility: 'Public',
-        like: 'Not Added Yet',
-        comment: [{
-            NewComment: 'This is first Comment',
-            user: req.body.author,
-            fullName: req.body.authorName,
-        }]
     })
     AddNewPost.save()
-        .then(data => {
-            res.json({message: 'Sussessfully Added'})
+        .then(() => {
+            return 'Successfully Added'
         })
-        .catch(error => {
-            res.json({message: 'Failed'})
-        }) */
+        .catch(() => {
+            return 'Failed'
+        })
+}
+const AddImg = (req, result) => {
+    const AddNewPost = new NewPost({
+        img: result.secure_url,
+        date: Date.now(),
+        author: req.body.author,
+        authorName: req.body.authorName,
+        visibility: 'Public',
+    })
+    AddNewPost.save()
+        .then(() => {
+            return 'Successfully Added'
+        })
+        .catch(() => {
+            return 'Failed'
+        })
+}
+const AddTitle = (req, result) => {
+    const AddNewPost = new NewPost({
+        title: req.body.title,
+        date: Date.now(),
+        author: req.body.author,
+        authorName: req.body.authorName,
+        visibility: 'Public',
+    })
+    AddNewPost.save()
+        .then(() => {
+            return 'Successfully Added'
+        })
+        .catch(() => {
+            return 'Failed'
+        })
+}
 
-
+router.post('/post', (req, res) => {
+    if (req.body.img && req.body.title) {
+        cloudinary.uploader.upload(req.body.img)
+            .then(result => {
+                const alert = AddTitleImg(req, result)
+                res.json({ message: alert });
+                console.log('Img and Title')
+            })
+            .catch(err => {
+                res.json({ message: 'Failed' });
+            });
+    }
+    else if (req.body.img && !req.body.title) {
+        cloudinary.uploader.upload(req.body.img)
+            .then(result => {
+                const alert = AddImg(req, result)
+                res.json({ message: alert });
+                console.log('Only Img')
+            })
+            .catch(err => {
+                res.json({ message: 'Failed' });
+            });
+    }
+    else {
+        const alert = AddTitle(req)
+        res.json({ message: alert });
+        console.log('Only Text');
+    }
 })
 
 module.exports = router;
