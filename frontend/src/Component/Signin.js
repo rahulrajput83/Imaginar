@@ -60,7 +60,6 @@ function Signin() {
 
             })
             .catch(err => {
-                console.log(err)
                 setButtonDisabled(false)
                 setAlertMessage('Something went wrong...');
                 setError(true);

@@ -32,7 +32,6 @@ function Profile() {
             })
             .catch(err => {
                 setLoading(false)
-                console.log('Something went wrong..')
             });
     }, [user]);
 

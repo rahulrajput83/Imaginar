@@ -50,7 +50,6 @@ function Home() {
         setPostData({...postData, img: ''})
     }
 
-    console.log(postData)
     const handleInputCLick = () => {
         inputRef.current.click();
     }
