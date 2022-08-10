@@ -69,7 +69,7 @@ function Home() {
             setErrorMessage('Posting...')
             setTimeout(() => setError(false), 2500);
             setSubmitDisabled(true);
-            fetch('http://localhost:2850/post', {
+            fetch('https://imaginar.herokuapp.com/post', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',

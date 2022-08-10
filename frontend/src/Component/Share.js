@@ -1,10 +1,17 @@
 import { Fragment, useRef } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
+import { FacebookShareButton, FacebookIcon } from 'next-share';
+import { TwitterShareButton, TwitterIcon } from 'next-share'
+import { LinkedinShareButton, LinkedinIcon } from 'next-share'
+import { WhatsappShareButton, WhatsappIcon } from 'next-share'
+
+
 
 export default function Share(props) {
-  const {open, setOpen} = props;
-
+  const { open, setOpen } = props;
   const cancelButtonRef = useRef(null)
+  const url = window.location.href
+
 
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -32,18 +39,33 @@ export default function Share(props) {
               leaveFrom="opacity-100 translate-y-0 sm:scale-100"
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
-              <Dialog.Panel className="relative bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-lg sm:w-full">
+              <Dialog.Panel className="w-11/12 relative bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-lg sm:w-full">
                 <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                   <div className="sm:flex sm:items-start">
                     <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                       <Dialog.Title as="h3" className="text-lg leading-6 font-medium text-gray-900">
                         Share this post
                       </Dialog.Title>
-                      <div className="mt-2">
-                        <p className="text-sm text-gray-500">
-                          Are you sure you want to deactivate your account? All of your data will be permanently
-                          removed. This action cannot be undone.
-                        </p>
+                      <div className="mt-2 flex flex-row">
+                        <FacebookShareButton
+                          url={url}
+                        >
+                          <FacebookIcon className='' size={40} round />
+                        </FacebookShareButton>
+                        <TwitterShareButton
+                          url={url}
+                        >
+                          <TwitterIcon className='ml-2' size={40} round />
+                        </TwitterShareButton>
+                        <LinkedinShareButton url={url}>
+                          <LinkedinIcon className='ml-2' size={40} round />
+                        </LinkedinShareButton>
+                        <WhatsappShareButton
+                          url={url}
+                          separator=":: "
+                        >
+                          <WhatsappIcon className='ml-2' size={40} round />
+                        </WhatsappShareButton>
                       </div>
                     </div>
                   </div>
@@ -54,7 +76,7 @@ export default function Share(props) {
                     className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm"
                     onClick={() => setOpen(false)}
                   >
-                    Deactivate
+                    Close
                   </button>
                 </div>
               </Dialog.Panel>
