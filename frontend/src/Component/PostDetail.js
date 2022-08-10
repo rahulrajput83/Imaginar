@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import profilelogo from '../Images/profile.svg'
 import { FaRegCommentAlt, FaShare, FaRegCalendar, FaGlobeAsia, FaLinkedinIn, FaGithub, FaInstagram, FaLink, } from "react-icons/fa";
@@ -56,28 +56,24 @@ function PostDetail() {
             author: user,
             authorName: fullName
         });
-
     }
 
-    useEffect(() => {
-        loadData();
-        loadComments();
-    }, [])
-    let findCommentLength = 0
-    const loadComments = () => {
+    const loadComments = useCallback(() => {
         fetch('https://imaginar.herokuapp.com/comments', {
             method: 'GET'
         })
             .then(response => response.json())
             .then(response => {
+                let findCommentLength = 0
                 let LoadingComments = response.comments.filter(value => value.postId === uniqueid);
                 LoadingComments = [...LoadingComments].reverse();
                 setComments(LoadingComments);
                 findCommentLength = LoadingComments.length;
                 setCommentLength(findCommentLength);
             })
-    }
-    const loadData = () => {
+    }, [uniqueid]);
+
+    const loadData = useCallback(() => {
         setLoading(true);
         fetch('https://imaginar.herokuapp.com/postdetails', {
             method: 'POST',
@@ -97,7 +93,12 @@ function PostDetail() {
                 setAlertMessage('Something went wrong...')
                 setTimeout(() => setError(false), 2500);
             });
-    }
+    }, [uniqueid])
+    useEffect(() => {
+        loadData();
+        loadComments();
+    }, [loadData, loadComments])
+
 
     return (
         <div className='w-full h-full flex items-center flex-col'>
