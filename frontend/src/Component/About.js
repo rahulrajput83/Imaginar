@@ -15,7 +15,7 @@ function About() {
             </div>
             <div className='shadow-lg bg-white w-full md:w-1/2  shadow-white-800 my-4 rounded-lg p-3 flex flex-col justify-center items-center'>
                 <div className='mt-4 uppercase font-bold'>Rahul Rajput</div>
-                <div className='text-sm text-slate-500'>Frontend Developer</div>
+                <div className='text-sm text-slate-500'>Frontend Developer | MERN Developer</div>
                 <div className='no-underline flex mb-10 mt-5 flex-row justify-center'>
                     <a href='https://www.linkedin.com/in/rahulrajput83/' className="mx-2.5 flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-blue-800 text-white hover:bg-blue-100 hover:text-blue-800 cursor-pointer sm:mx-2.5 sm:h-10 sm:w-10">
                         <FaLinkedinIn />

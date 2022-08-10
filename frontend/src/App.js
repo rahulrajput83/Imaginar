@@ -6,8 +6,6 @@ import Profile from './Component/Profile';
 import Signin from './Component/Signin';
 import Signup from './Component/Signup';
 import { useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
-import { useCookies } from 'react-cookie';
 
 
 const Private = ({ user, children }) => {
@@ -25,23 +23,7 @@ const SignPrivate = ({ user, children }) => {
 }
 
 function App() {
-  const userData = useSelector((state) => state.user);
-  const [cookies] = useCookies(['token']);
-  let user
-  const userValue = () => {
-    const Data = cookies.token;
-    if(userData) {
-      user = userData;
-    }
-    else {
-      user = Data;
-    }
-  };
-
-  useEffect(() => {
-    userValue();
-  })
-  
+  const user = useSelector((state) => state.user);
 
   return (
     <BrowserRouter>

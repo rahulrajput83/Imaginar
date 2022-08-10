@@ -1,11 +1,9 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { useCookies } from 'react-cookie';
 
 
 function Signin() {
-    const [setCookies] = useCookies(['token']);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [buttonDisabled, setButtonDisabled] = useState(false);
@@ -37,7 +35,7 @@ function Signin() {
     const handleSubmit = (e) => {
         setButtonDisabled(true)
         e.preventDefault();
-        fetch('http://localhost:2850/signin', {
+        fetch('https://imaginar.herokuapp.com/signin', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -47,6 +45,10 @@ function Signin() {
         })
             .then(response => response.json())
             .then(response => {
+                if (response.message === 'Successfully Login') {
+                    saveData(response);
+                    return navigate("/");
+                };
                 setButtonDisabled(false)
                 setAlertMessage(response.message);
                 setError(true);
@@ -55,13 +57,10 @@ function Signin() {
                     email: '',
                     password: ''
                 });
-                if (response.message === 'Successfully Login') {
-                    saveData(response);
-                    navigate("/");
-                };
 
             })
             .catch(err => {
+                console.log(err)
                 setButtonDisabled(false)
                 setAlertMessage('Something went wrong...');
                 setError(true);
@@ -80,14 +79,6 @@ function Signin() {
             payload: response.value.fullName
         };
         dispatch(action);
-        console.log('Login')
-        setCookies('token', JSON.stringify({
-            id: response.value._id,
-            fullName: response.value.fullName
-        }), {
-            path: '/',
-            expires: new Date(Date.now() + 18000000)
-        });
     }
     return (
         <div className='w-full h-full flex items-center flex-col'>

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import profilelogo from '../Images/profile.svg';
-import Cookies from 'universal-cookie';
 
 
 function Profile() {
@@ -11,13 +10,12 @@ function Profile() {
     const [loading, setLoading] = useState(false);
     const user = useSelector((state) => state.user);
     const [account, setAccount] = useState({});
-    const cookies = new Cookies();
     let navigate = useNavigate();
 
 
     useEffect(() => {
         setLoading(true);
-        fetch('http://localhost:2850/account', {
+        fetch('https://imaginar.herokuapp.com/account', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -40,7 +38,6 @@ function Profile() {
 
 
     const handleLogout = () => {
-        cookies.remove('token', { path: '/' });
         let action = {
             type: "LOGOUT",
             payload: ''

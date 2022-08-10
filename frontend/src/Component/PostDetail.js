@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import profilelogo from '../Images/profile.svg'
-import { FaRegCommentAlt, FaRegThumbsUp, FaShare, FaRegCalendar, FaGlobeAsia, FaLinkedinIn, FaGithub, FaInstagram, FaLink, } from "react-icons/fa";
+import { FaRegCommentAlt, FaShare, FaRegCalendar, FaGlobeAsia, FaLinkedinIn, FaGithub, FaInstagram, FaLink, } from "react-icons/fa";
 import { useSelector } from 'react-redux';
 import { BiSend } from "react-icons/bi";
+import Share from './Share';
 
 function PostDetail() {
     const { uniqueid } = useParams();
     const fullName = useSelector((state) => state.fullName);
     const user = useSelector((state) => state.user);
     const [error, setError] = useState(false);
+    const [open, setOpen] = useState(false)
     const [alertMeassage, setAlertMessage] = useState('Failed to load post.')
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -28,7 +30,7 @@ function PostDetail() {
         setError(true);
         setAlertMessage('Posting ...')
         setTimeout(() => setError(false), 2500);
-        fetch('http://localhost:2850/postComment', {
+        fetch('https://imaginar.herokuapp.com/postComment', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -54,7 +56,7 @@ function PostDetail() {
             author: user,
             authorName: fullName
         });
-        
+
     }
 
     useEffect(() => {
@@ -63,7 +65,7 @@ function PostDetail() {
     }, [])
     let findCommentLength = 0
     const loadComments = () => {
-        fetch('http://localhost:2850/comments', {
+        fetch('https://imaginar.herokuapp.com/comments', {
             method: 'GET'
         })
             .then(response => response.json())
@@ -77,7 +79,7 @@ function PostDetail() {
     }
     const loadData = () => {
         setLoading(true);
-        fetch('http://localhost:2850/postdetails', {
+        fetch('https://imaginar.herokuapp.com/postdetails', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -122,7 +124,7 @@ function PostDetail() {
             <div className='flex flex-row w-full justify-around items-start'>
                 <div className='shadow-lg bg-white w-80 hidden md:flex shadow-white-800 my-4 rounded-lg p-3 flex flex-col justify-center items-center'>
                     <div className='mt-4 uppercase font-bold'>Rahul Rajput</div>
-                    <div className='text-sm text-slate-500'>Frontend Developer</div>
+                    <div className='text-sm text-slate-500'>Frontend Developer | MERN Developer</div>
                     <div className='no-underline flex mb-10 mt-5 flex-row justify-center animate-rotate'>
                         <a href='https://www.linkedin.com/in/rahulrajput83/' className="mx-2.5 hover:animate-spin flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-blue-800 text-white hover:bg-blue-100 hover:text-blue-800 cursor-pointer sm:mx-2.5 sm:h-10 sm:w-10">
                             <FaLinkedinIn />
@@ -151,7 +153,7 @@ function PostDetail() {
                         <div className='items-center flex flex-col w-full md:w-5/12 mt-5 rounded shadow-xl shadow-slate-200 mb-10'>
                             <div className='pt-3 w-full bg-white flex flex-col'>
                                 {
-                                    data.title ? <><div className='flex flex-row items-center'>
+                                    data.authorName ? <><div className='flex flex-row items-center'>
                                         <img className='ml-3 w-8 h-8 mr-4' src={profilelogo} alt='profile' />
                                         <div className='flex flex-col justify-center items-center'>
                                             <div className='text-sm'><span className='font-medium text-blue-800 mr-1'>{data.authorName}</span>has added an post.</div>
@@ -168,20 +170,21 @@ function PostDetail() {
 
                                 {
                                     data.img ? <div className='flex flex-row w-full h-48 md:h-96 bg-white-800 justify-center overflow-hidden items-center'>
-                                        <img className='object-cover w-full bg-blue-800' src={data.img} alt={data.title} />
+                                        <img className='object-cover h-full w-full bg-blue-800' src={data.img} alt={data.title} />
                                     </div> : null
                                 }
                                 <div className='w-full justify-around p-1 items-center flex flex-row'>
-                                    <div className='flex p-2 text-blue-800 flex-row justify-center items-center'>
+                                    {/* <div className='flex p-2 text-blue-800 flex-row justify-center items-center'>
                                         <FaRegThumbsUp className='text-lg mr-2' />
                                         <span className=''>{data.like}</span>
-                                    </div>
+                                    </div> */}
                                     <div className='flex p-2 text-blue-800 flex-row justify-center items-center'>
                                         <FaRegCommentAlt className='text-lg mr-2' />
                                         <span className=''>{commentLength}</span>
                                     </div>
                                     <div className='flex p-2 text-blue-800 flex-row justify-center items-center'>
-                                        <FaShare className='text-lg' />
+                                        <FaShare onClick={() => setOpen(true)} className='text-lg cursor-pointer' />
+                                        <Share open={open} setOpen={setOpen} />
                                     </div>
                                 </div>
                             </div>

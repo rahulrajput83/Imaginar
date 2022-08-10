@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Profile from './Profile'
 import profilelogo from '../Images/profile.svg'
-import { IoIosImages, IoIosSend, IoMdRefreshCircle } from "react-icons/io";
+import { IoIosImages, IoIosSend, IoMdClose, IoMdRefreshCircle } from "react-icons/io";
 import { FaRegCalendar, FaGlobeAsia } from "react-icons/fa";
 import { useSelector } from 'react-redux';
 import ComingSoon from './ComingSoon';
@@ -19,33 +19,38 @@ function Home() {
     const [errorMessage, setErrorMessage] = useState('');
     const [submitDisabled, setSubmitDisabled] = useState(false)
     const [postData, setPostData] = useState({
-        img: '',
+        img: preview,
         title: '',
         author: user,
         authorName: fullName
     });
-    
 
     const handleImageChange = (e) => {
-        if (e.target.files) {
-            let file = e.target.files[0];
-            setFileToBase(file);
-        }
-        else {
-            e.target.value = null;
-            setPreview('j')
-        }
+        let file = e.target.files[0];
+        setFileToBase(file);
+        e.target.value = ''
 
     }
     const setFileToBase = (file) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onloadend = () => {
-            setPostData({ ...postData, img: reader.result });
-            setPreview(reader.result)
+        if (!file) {
+            alert('Please select an image');
+        }
+        else {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onloadend = () => {
+                setPostData({ ...postData, img: reader.result });
+                setPreview(reader.result)
+            }
         }
     }
 
+    const deleteImg = () => {
+        setPreview('');
+        setPostData({...postData, img: ''})
+    }
+
+    console.log(postData)
     const handleInputCLick = () => {
         inputRef.current.click();
     }
@@ -78,8 +83,11 @@ function Home() {
                     loadData();
                     setPostData({
                         img: '',
-                        title: ''
+                        title: '',
+                        author: user,
+                        authorName: fullName
                     });
+                    setPreview('');
                     setError(true);
                     setErrorMessage('Posted...')
                     setTimeout(() => setError(false), 2500);
@@ -99,7 +107,7 @@ function Home() {
 
     const loadData = () => {
         setLoading(true);
-        fetch('http://localhost:2850/post', {
+        fetch('https://imaginar.herokuapp.com/post', {
             method: 'GET'
         })
             .then(response => response.json())
@@ -143,13 +151,11 @@ function Home() {
                             <button disabled={submitDisabled} onClick={handleSubmit} className='text-white bg-blue-700 hover:bg-blue-800 disabled:cursor-not-allowed font-medium rounded-3xl text-sm px-2 py-2 text-center mr-2 inline-flex items-center'><IoIosSend /></button>
                             <IoMdRefreshCircle onClick={loadData} className='cursor-pointer w-12 h-12 md:w-10 md:h-10 text-blue-800 hover:text-blue-600 mr-1' />
                         </div>
-                        {/* <div className='flex flex-row mb-3 w-11/12 outline-none items-center'>
-
-                        </div> */}
                     </div>
                     {
-                        preview ? <div className='flex flex-row px-4 mt-3 md:mt-0 md:mt-0 w-full h-48 md:h-96 bg-white-800 justify-center overflow-hidden items-center'>
-                            <img className='object-cover w-full bg-blue-800' src={preview} alt='' />
+                        preview ? <div className='rounded-lg shadow-lg bg-white relative flex flex-col mt-3 w-full h-48 md:h-96 bg-white-800 justify-center overflow-hidden items-end'>
+                            <img className='bg-blue-800 w-full h-full object-cover' src={preview} alt='' />
+                            <IoMdClose onClick={deleteImg} className='top-0 absolute cursor-pointer w-7 h-7' />
                         </div> : null
                     }
                     {
@@ -163,11 +169,11 @@ function Home() {
                         </>
                             : null
                     }
-                    <div className='mt-10 w-full flex flex-col justify-center items-center '>
+                    <div className='mt-4 w-full flex flex-col justify-center items-center '>
                         {
                             Data.map((data, index) => {
                                 return (
-                                    <Link to={`/posts/${data._id}`} key={index} className='mt-5 pt-3 w-full pb-0 bg-white flex flex-col'>
+                                    <Link to={`/posts/${data._id}`} key={index} className='rounded-lg shadow-lg bg-white mt-5 pt-3 w-full pb-0 bg-white flex flex-col'>
                                         <div className='flex flex-row items-center'>
                                             <img className='ml-3 w-8 h-8 mr-4' src={profilelogo} alt='profile' />
                                             <div className='flex flex-col justify-center items-center'>
@@ -184,7 +190,7 @@ function Home() {
                                         <div className='px-3 w-full py-2 break-all text-sm'>{data.title}</div>
                                         {
                                             data.img ? <div className='flex flex-row w-full h-48 md:h-96 bg-white-800 justify-center overflow-hidden items-center'>
-                                                <img className='object-cover cursor-pointer w-full bg-blue-800' src={data.img} alt={data.title} />
+                                                <img className='object-cover cursor-pointer h-full w-full bg-blue-800' src={data.img} alt={data.title} />
                                             </div> : null
                                         }
                                     </Link>
