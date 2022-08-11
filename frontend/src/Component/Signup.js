@@ -83,7 +83,7 @@ function Signup() {
             </div>: null
             }
             <div className='bg-black-600 items-center flex flex-col w-11/12 md:w-1/2 mt-5 rounded shadow-xl shadow-slate-200 p-5'>
-                <h1 className='font-bold text-2xl'>Welcome Back</h1>
+                <h1 className='font-bold text-2xl'>Welcome to Imaginar</h1>
                 <form className='flex flex-col w-full justify-center items-center' onSubmit={handleSubmit}>
                     <input value={registerData.fullName} onInvalid={onfullNameInvalid} onChange={onChange} name='fullName' placeholder='Full Name' className={`text-sm mt-8 w-11/12 md:w-3/4 ${fullnameInvalid} outline-none py-2.5 px-3 bg-slate-100 rounded`} type='text' required />
                     <input value={registerData.email} onInvalid={onEmailInvalid} onChange={onChange} name='email' placeholder='Email Address' className={`text-sm mt-8 w-11/12 md:w-3/4 ${emailInvalid} outline-none py-2.5 px-3 bg-slate-100 rounded`} type='email' required />

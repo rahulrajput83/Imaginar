@@ -27,35 +27,43 @@ function PostDetail() {
         setNewComment({ ...newComment, [e.target.name]: e.target.value });
     }
     const handleSubmit = () => {
-        setError(true);
-        setAlertMessage('Posting ...')
-        setTimeout(() => setError(false), 2500);
-        fetch('https://imaginar.herokuapp.com/postComment', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(newComment)
-        })
-            .then(response => response.json())
-            .then(response => {
-                loadComments();
-                setError(true);
-                setAlertMessage(response.message);
-                setTimeout(() => setError(false), 2500);
+        if (!newComment.title) {
+            setError(true);
+            setAlertMessage('Enter Comment...');
+            setTimeout(() => setError(false), 2500);
+        }
+        else {
+            setError(true);
+            setAlertMessage('Posting ...')
+            setTimeout(() => setError(false), 2500);
+            fetch('https://imaginar.herokuapp.com/postComment', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(newComment)
             })
-            .catch(err => {
-                setError(true);
-                setAlertMessage('Something went wrong...')
-                setTimeout(() => setError(false), 2500);
+                .then(response => response.json())
+                .then(response => {
+                    loadComments();
+                    setError(true);
+                    setAlertMessage(response.message);
+                    setTimeout(() => setError(false), 2500);
+                })
+                .catch(err => {
+                    setError(true);
+                    setAlertMessage('Something went wrong...')
+                    setTimeout(() => setError(false), 2500);
+                });
+            setNewComment({
+                postid: uniqueid,
+                title: '',
+                author: user,
+                authorName: fullName
             });
-        setNewComment({
-            postid: uniqueid,
-            title: '',
-            author: user,
-            authorName: fullName
-        });
+        }
+
     }
 
     const loadComments = useCallback(() => {
@@ -157,7 +165,7 @@ function PostDetail() {
                                     data.authorName ? <><div className='flex flex-row items-center'>
                                         <img className='ml-3 w-8 h-8 mr-4' src={profilelogo} alt='profile' />
                                         <div className='flex flex-col justify-center items-center'>
-                                            <div className='text-sm'><span className='font-medium text-blue-800 mr-1'>{data.authorName}</span>has added an post.</div>
+                                            <div className='w-full text-left text-sm'><span className='font-medium text-blue-800 mr-1'>{data.authorName}</span>has added an post.</div>
                                             <div className='w-full flex flex-row justify-start items-start'>
                                                 <div className='text-xs text-slate-400 mr-3 flex justify-center items-center'><FaRegCalendar className='mr-1' />
                                                     {new Date((data.date)).toLocaleString("en-US", { timeZone: 'Asia/Kolkata' })}
@@ -197,7 +205,10 @@ function PostDetail() {
                                             <div className='mr-4 flex cursor-pointer text-blue-800 flex-row justify-center items-center'>
                                                 <BiSend onClick={handleSubmit} className='text-lg' />
                                             </div>
-                                        </div> : <span className='w-full text-center py-5 font-medium flex flex-col text-sm text-slate-800'>Please login to comment to this post.</span>
+                                        </div> : <div className='w-full flex flex-row items-center justify-center py-5 font-medium text-sm text-slate-800'>
+                                            <span className='mr-1'>Please</span>
+                                            <Link className='text-blue-800' to='/signin'>login</Link>
+                                            <span className='ml-1'>to comment to this post.</span></div>
                                 }
                                 {
                                     comments ? <div className='my-5 w-full flex flex-col'>

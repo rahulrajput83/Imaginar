@@ -176,7 +176,7 @@ function Home() {
                                         <div className='flex flex-row items-center'>
                                             <img className='ml-3 w-8 h-8 mr-4' src={profilelogo} alt='profile' />
                                             <div className='flex flex-col justify-center items-center'>
-                                                <div className='text-sm'><span className='font-medium text-blue-800 mr-1'>{data.authorName}</span>has added an post.</div>
+                                                <div className='w-full text-left text-sm'><span className='font-medium text-blue-800 mr-1 text-left'>{data.authorName}</span>has added an post.</div>
                                                 <div className='w-full flex flex-row justify-start items-start'>
                                                     <div className='text-xs text-slate-400 mr-3 flex justify-center items-center'><FaRegCalendar className='mr-1' />
                                                         {new Date(data.date).toLocaleString("en-US", { timeZone: 'Asia/Kolkata' })}
