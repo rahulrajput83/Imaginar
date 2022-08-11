@@ -35,11 +35,11 @@ app.use(function (req, res, next) {
     const allowedOrigin = ['https://rahulrajput83-imaginar.vercel.app', 'http://localhost:3000'];
     const origin = res.header.origin;
     if(allowedOrigin.includes(origin)) {
-        res.header("Access-Control-Allow-Origin", origin);
+        res.setHeader("Access-Control-Allow-Origin", origin);
     }
     const originReq = req.header.origin;
     if(allowedOrigin.includes(origin)) {
-        req.header("Access-Control-Allow-Origin", originReq);
+        req.setHeader("Access-Control-Allow-Origin", originReq);
     }
     
     res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, PATCH");
