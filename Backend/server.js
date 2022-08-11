@@ -37,10 +37,13 @@ app.use(function (req, res, next) {
     if(allowedOrigin.includes(origin)) {
         res.header("Access-Control-Allow-Origin", origin);
     }
+    const originReq = req.header.origin;
+    if(allowedOrigin.includes(origin)) {
+        req.header("Access-Control-Allow-Origin", originReq);
+    }
     
     res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, PATCH");
     res.header("Access-Control-Allow-Headers", "Origin, X-Api-Key, X-Requested-With, Content-Type, Accept, Authorization")
-    req.header("Access-Control-Allow-Origin", "https://rahulrajput83-imaginar.vercel.app");
     req.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, PATCH");
     req.header("Access-Control-Allow-Headers", "Origin, X-Api-Key, X-Requested-With, Content-Type, Accept, Authorization")
     next();
