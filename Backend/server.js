@@ -33,7 +33,7 @@ mongoose.connect(process.env.connectionString)
 /* Cors Header to allows data access to other domain. Frontend url */
 app.use(function (req, res, next) {
     const allowedOrigin = ['https://rahulrajput83-imaginar.vercel.app', 'http://localhost:3000'];
-    const origin = res.headers.origin;
+    const origin = res.header.origin;
     if(allowedOrigin.includes(origin)) {
         res.header("Access-Control-Allow-Origin", origin);
     }
