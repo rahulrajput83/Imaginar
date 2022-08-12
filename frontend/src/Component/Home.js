@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
-import Profile from './Profile'
 import profilelogo from '../Images/profile.svg'
 import { IoIosImages, IoIosSend, IoMdClose, IoMdRefreshCircle } from "react-icons/io";
 import { FaRegCalendar, FaGlobeAsia } from "react-icons/fa";
@@ -129,12 +128,12 @@ function Home() {
                 </div> : null
             }
 
-            <div className='flex rounded shadow-lg shadow-white-800 flex-row w-full px-3 md:px-6 py-4 items-center justify-between'>
+            <div className='flex mb-4 shadow-lg shadow-white-800 flex-row w-full px-3 md:px-6 py-4 items-center justify-between'>
                 <Link to='/'>
                     <div className='font-bold uppercase text-xl md:text-2xl'>imaginar</div>
                 </Link>
                 <Link to='/account'>
-                    <button className='text-blue-700 bg-blue-100 hover:bg-blue-50 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 inline-flex items-center md:hidden'>Profile</button>
+                    <button className='text-blue-700 bg-blue-100 hover:bg-blue-50 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 inline-flex items-center'>Account</button>
                 </Link>
             </div>
             <div className='w-full h-full bg-white p-1 md:px-2 flex flex-col md:flex-row justify-between items-start'>
@@ -186,7 +185,7 @@ function Home() {
                                             </div>
                                         </div>
 
-                                        <div className='px-3 w-full py-2 break-all text-sm'>{data.title}</div>
+                                        <div className='px-3 w-full py-2 text-justify break-all text-sm'>{data.title}</div>
                                         {
                                             data.img ? <div className='flex flex-row w-full h-48 md:h-96 bg-white-800 justify-center overflow-hidden items-center'>
                                                 <img className='object-cover cursor-pointer h-full w-full bg-blue-800' src={data.img} alt={data.title} />
@@ -198,8 +197,8 @@ function Home() {
                         }
                     </div>
                 </div>
-                <div className='hidden md:block w-11/12 md:w-80'>
-                    <Profile />
+                <div className='shadow-lg text-slate-300 bg-white w-80 h-80 hidden md:flex shadow-white-800 my-4 rounded-lg p-3 flex flex-col justify-center items-center'>
+                    Advertisement Here
                 </div>
             </div>
 

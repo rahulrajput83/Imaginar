@@ -1,17 +1,19 @@
 import React from 'react'
 import { FaGithub, FaInstagram, FaLink, FaLinkedinIn } from 'react-icons/fa';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 function About() {
+    const user = useSelector((state) => state.user);
     return (
         <div className='w-full h-full flex items-center flex-col'>
             <div className='flex rounded shadow-lg shadow-white-800 flex-row w-full px-3 md:px-6 py-4 items-center justify-between'>
                 <Link to='/'>
                     <div className='font-bold uppercase text-xl md:text-2xl'>imaginar</div>
                 </Link>
-                <Link to='/signin'>
+                {user ? null : <Link to='/signin'>
                     <div className='text-blue-700 bg-slate-100 hover:bg-slate-50 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 inline-flex items-center'>Login</div>
-                </Link>
+                </Link>}
             </div>
             <div className='shadow-lg bg-white w-full md:w-1/2  shadow-white-800 my-4 rounded-lg p-3 flex flex-col justify-center items-center'>
                 <div className='mt-4 uppercase font-bold'>Rahul Rajput</div>

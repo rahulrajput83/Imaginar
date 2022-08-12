@@ -14,7 +14,7 @@ router.post('/userpost', (req, res) => {
 
 router.post('/delete', (req, res) => {
     NewPost.deleteOne({ _id: req.body.id })
-        .then(res.json({message: 'Deleted'}))
+        .then(res.json({message: 'Successfully Deleted...'}))
         .catch(res.json({message: 'Error, Please try again...'}))
 });
 
