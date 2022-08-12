@@ -3,11 +3,9 @@ const router = express.Router();
 const NewPost = require('../Schema/Post');
 
 router.post('/userpost', (req, res) => {
-    let gotData = [];
-    NewPost.find({})
+    NewPost.find({ _id: req.body.id })
         .then(data => {
-            gotData = data.filter(item => item._id === req.body.id)
-            res.json({ value: gotData })
+            res.json({ value: data })
         })
         .catch(error => {
             res.json({ message: 'Error, Please try again...' })
