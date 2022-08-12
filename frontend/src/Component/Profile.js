@@ -86,7 +86,7 @@ function Profile() {
         setAlertMessage('Deleting...');
         setError(true);
         setTimeout(() => setError(false), 2500);
-        fetch('http://localhost:2850/delete', {
+        fetch('https://imaginar.herokuapp.com/delete', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',

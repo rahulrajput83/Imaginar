@@ -6,9 +6,9 @@ function Signup() {
     const [buttonDisabled, setButtonDisabled] = useState(false);
     const [error, setError] = useState(false);
     const [alertMeassage, setAlertMessage] = useState('User Already Registered.');
-    const [emailInvalid, setEmailInvalid] = useState('animate-none');
-    const [passwordInvalid, setPasswordInvalid] = useState('animate-none');
-    const [fullnameInvalid, setFullNameInvalid] = useState('animate-none');
+    const [emailInvalid, setEmailInvalid] = useState(false);
+    const [passwordInvalid, setPasswordInvalid] = useState(false);
+    const [fullnameInvalid, setFullNameInvalid] = useState(false);
 
     const [registerData, setRegisterData] = useState({
         fullName: '',
@@ -18,36 +18,20 @@ function Signup() {
 
     const onChange = (e) => {
         setRegisterData({ ...registerData, [e.target.name]: e.target.value });
-        setFullNameInvalid('animate-none');
-        setEmailInvalid('animate-none');
-        setPasswordInvalid('animate-none');
+        setFullNameInvalid(false);
+        setEmailInvalid(false);
+        setPasswordInvalid(false);
     }
     const onEmailInvalid = () => {
-        setAlertMessage('Invalid Email Address...');
-        setError(true)
-        setEmailInvalid('animate-inputBox')
-        setTimeout(() => {
-            setError(false);
-            setEmailInvalid('animate-none')
-        }, 800);
+        setEmailInvalid(true)
     }
+
     const onfullNameInvalid = () => {
-        setAlertMessage('Name Required...');
-        setError(true)
-        setFullNameInvalid('animate-inputBox')
-        setTimeout(() => {
-            setError(false)
-            setFullNameInvalid('animate-none')
-        }, 800);
+        setFullNameInvalid(true)
     }
+
     const onPasswordInvalid = () => {
-        setAlertMessage('Password should be 8-20 characters and include at least 1 letter, 1 number and 1 special character!');
-        setError(true)
-        setPasswordInvalid('animate-inputBox')
-        setTimeout(() => {
-            setError(false)
-            setPasswordInvalid('animate-none')
-        }, 800);
+        setPasswordInvalid(true)
     }
 
     const handleSubmit = (e) => {
@@ -101,8 +85,17 @@ function Signup() {
                 <h1 className='font-bold text-2xl'>Welcome to Imaginar</h1>
                 <form className='flex flex-col w-full justify-center items-center' onSubmit={handleSubmit}>
                     <input value={registerData.fullName} onInvalid={onfullNameInvalid} onChange={onChange} name='fullName' placeholder='Full Name' className={`text-sm mt-8 w-11/12 md:w-3/4 ${fullnameInvalid} outline-none py-2.5 px-3 bg-slate-100 rounded`} type='text' required />
+                    {
+                        fullnameInvalid ? <span className='text-sm text-red-500 w-11/12 md:w-3/4 px-3'>Please enter your full name...</span> : null
+                    }
                     <input value={registerData.email} onInvalid={onEmailInvalid} onChange={onChange} name='email' placeholder='Email Address' className={`text-sm mt-8 w-11/12 md:w-3/4 ${emailInvalid} outline-none py-2.5 px-3 bg-slate-100 rounded`} type='email' required />
+                    {
+                        emailInvalid ? <span className='text-sm text-red-500 w-11/12 md:w-3/4 px-3'>Please enter valid email address... </span> : null
+                    }
                     <input value={registerData.password} pattern='^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$' onInvalid={onPasswordInvalid} onChange={onChange} name='password' placeholder='Password' className={`text-sm mt-8 w-11/12 md:w-3/4 ${passwordInvalid} outline-none py-2.5 px-3 bg-slate-100 rounded`} type='password' required />
+                    {
+                        passwordInvalid ? <span className='text-sm text-red-500 w-11/12 md:w-3/4 px-3'>Password should be 8-20 characters and include at least 1 letter, 1 number and 1 special character!</span> : null
+                    }
                     <div className='my-10 w-11/12 md:w-3/4 flex flex-row justify-between items-center'>
                         <button disabled={buttonDisabled} type='submit' className='text-white bg-blue-700 hover:bg-blue-800 disabled:cursor-not-allowed font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 inline-flex items-center'>Register</button>
                         <Link to='/signin'>
