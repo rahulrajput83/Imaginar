@@ -3,7 +3,7 @@ const router = express.Router();
 const NewPost = require('../Schema/Post');
 
 router.post('/userpost', (req, res) => {
-    NewPost.find({ _id: req.body.id })
+    NewPost.find({ author: req.body.id })
         .then(data => {
             res.json({ value: data })
         })
