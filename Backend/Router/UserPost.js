@@ -17,7 +17,7 @@ router.post('/delete', (req, res) => {
     NewPost.deleteOne({ _id: req.body.id })
         .then(res.json({message: 'Successfully Deleted...'}))
         .catch(res.json({message: 'Error, Please try again...'}));
-    NewComment.deleteMany({ postId: req.body.id})
+    NewComment.deleteMany({ 'postId': req.body.id})
     
 });
 
