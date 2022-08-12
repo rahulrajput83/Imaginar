@@ -5,8 +5,8 @@ const NewPost = require('../Schema/Post');
 router.post('/userpost', (req, res) => {
     NewPost.find({})
         .then(data => {
-            const gotData = data.filter(item => item._id === req.body.id)
-            res.json({ value: gotData })
+            /* const gotData = data.filter(item => item._id === req.body.id) */
+            res.json({ value: data })
         })
         .catch(error => {
             res.json({ message: 'Error, Please try again...' })
