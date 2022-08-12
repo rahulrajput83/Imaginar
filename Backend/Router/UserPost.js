@@ -10,6 +10,12 @@ router.post('/userpost', (req, res) => {
         .catch(error => {
             res.json({ message: 'Error, Please try again...' })
         })
-})
+});
+
+router.post('/delete', (req, res) => {
+    NewPost.deleteOne({ _id: req.body.id })
+        .then(res.json({message: 'Deleted'}))
+        .catch(res.json({message: 'Error, Please try again...'}))
+});
 
 module.exports = router;
