@@ -8,6 +8,7 @@ const routeNewPost = require('./Router/NewPost');
 const routeComment = require('./Router/Comment')
 const routePostDetails = require('./Router/PostDetails');
 const fileUpload = require('express-fileupload');
+const UserPost = require('./Router/UserPost')
 
 /* Initializes express app. */
 const app = express();
@@ -61,6 +62,7 @@ app.use('/', routeAccount);
 app.use('/', routeNewPost);
 app.use('/', routePostDetails);
 app.use('/', routeComment);
+app.use('/', UserPost);
 
 app.get('/', function (req, res) {
     res.send('hello')
