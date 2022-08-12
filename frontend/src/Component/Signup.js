@@ -31,6 +31,7 @@ function Signup() {
             setEmailInvalid('animate-none')
         }, 800);
     }
+
     const onfullNameInvalid = () => {
         setAlertMessage('Name Required...');
         setError(true)
@@ -40,6 +41,7 @@ function Signup() {
             setFullNameInvalid('animate-none')
         }, 800);
     }
+
     const onPasswordInvalid = () => {
         setAlertMessage('Password should be 8-20 characters and include at least 1 letter, 1 number and 1 special character!');
         setError(true)
