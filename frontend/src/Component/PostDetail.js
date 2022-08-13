@@ -178,8 +178,8 @@ function PostDetail() {
                                 }
 
                                 {
-                                    data.img ? <div className='flex flex-row w-full h-48 md:h-96 bg-white-800 justify-center overflow-hidden items-center'>
-                                        <img className='object-cover h-full w-full bg-blue-800' src={data.img} alt={data.title} />
+                                    data.img ? <div className='flex flex-row w-full h-48 md:h-96 bg-white justify-center overflow-hidden items-center'>
+                                        <img className='object-cover h-full w-full bg-white' src={data.img} alt={data.title} />
                                     </div> : null
                                 }
                                 <div className='w-full justify-around p-1 items-center flex flex-row'>

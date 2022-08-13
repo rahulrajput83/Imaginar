@@ -151,8 +151,8 @@ function Home() {
                         </div>
                     </div>
                     {
-                        preview ? <div className='rounded-lg shadow-lg bg-white relative flex flex-col mt-3 w-full h-48 md:h-96 bg-white-800 justify-center overflow-hidden items-end'>
-                            <img className='bg-blue-800 w-full h-full object-cover' src={preview} alt='' />
+                        preview ? <div className='rounded-lg shadow-lg bg-white relative flex flex-col mt-3 w-full h-48 md:h-96 justify-center overflow-hidden items-end'>
+                            <img className='bg-white w-full h-full object-cover' src={preview} alt='' />
                             <IoMdClose onClick={deleteImg} className='top-0 absolute cursor-pointer w-7 h-7' />
                         </div> : null
                     }
@@ -187,8 +187,8 @@ function Home() {
 
                                         <div className='px-3 w-full py-2 text-justify break-all text-sm'>{data.title}</div>
                                         {
-                                            data.img ? <div className='flex flex-row w-full h-48 md:h-96 bg-white-800 justify-center overflow-hidden items-center'>
-                                                <img className='object-cover cursor-pointer h-full w-full bg-blue-800' src={data.img} alt={data.title} />
+                                            data.img ? <div className='flex flex-row w-full h-48 md:h-96 bg-white justify-center overflow-hidden items-center'>
+                                                <img className='object-cover cursor-pointer h-full w-full bg-white' src={data.img} alt={data.title} />
                                             </div> : null
                                         }
                                     </Link>
