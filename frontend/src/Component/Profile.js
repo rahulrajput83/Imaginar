@@ -113,6 +113,9 @@ function Profile() {
             .then(response => response.json())
             .then(response => {
                 loadPost();
+                setAlertMessage(response.message);
+                setError(true);
+                setTimeout(() => setError(false), 2500);
             })
             .catch(err => {
                 console.log('Error, Please try again... ')

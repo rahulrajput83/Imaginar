@@ -25,9 +25,7 @@ router.post('/delete', (req, res) => {
 
 router.post('/update', (req, res) => {
     NewPost.updateOne({ _id: req.body.id }, { $set: { 'title': req.body.title } })
-        .then(() => {
-            res.json({ message: 'Updated...' })
-        })
+        .then(res.json({ message: 'Updated...' }))
         .catch(res.json({ message: 'Error, Please try again...' }));
 })
 
