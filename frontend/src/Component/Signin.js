@@ -25,11 +25,11 @@ function Signin() {
     }
     const onEmailInvalid = () => {
         setEmailInvalid('animate-inputBox')
-        setTimeout(() => setEmailInvalid('animate-none'), 800);
+        setTimeout(() => setEmailInvalid('animate-none'), 2500);
     }
     const onPasswordInvalid = () => {
         setPasswordInvalid('animate-inputBox')
-        setTimeout(() => setPasswordInvalid('animate-none'), 800);
+        setTimeout(() => setPasswordInvalid('animate-none'), 2500);
     }
 
     const handleSubmit = (e) => {
