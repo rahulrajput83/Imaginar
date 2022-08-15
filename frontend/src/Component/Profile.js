@@ -238,17 +238,17 @@ function Profile() {
                                                 null
                                             }
                                         </div>
-                                        <div className='w-full text-center font-bold text-xl uppercase'>{account.fullName}</div>
+                                        <div className='mt-4 w-full text-center font-bold text-xl uppercase'>{account.fullName}</div>
                                         <div className='mt-6 flex flex-col w-full items-center'>
-                                            <div className='w-11/12 flex justify-start items-center'>
+                                            {/* <div className='w-11/12 flex justify-start items-center'>
                                                 <div className="flex flex-row items-center justify-center h-10 w-10 rounded-full bg-gray-300 sm:mx-0 sm:h-10 sm:w-10">
                                                     <MdOutlineEmail className="h-5 w-5 text-slate-800" />
                                                 </div>
                                                 <span className='ml-2 text-sm text-black'>
                                                     {account.email}
                                                 </span>
-                                            </div>
-                                            <div className='mt-4 w-11/12 flex justify-start items-center'>
+                                            </div> */}
+                                            <div className='mt-2 mb-6 w-11/12 flex justify-start items-center'>
                                                 <div className="flex flex-row items-center justify-center h-10 w-10 rounded-full bg-gray-300 sm:mx-0 sm:h-10 sm:w-10">
                                                     <MdDateRange className="h-5 w-5 text-slate-800" />
                                                 </div>
