@@ -27,7 +27,7 @@ export default function Delete(props) {
                                         Are you sure you want to delete this post ? This action cannot be undone.
                                     </p>
                                 </div>
-                                <div className="rounded-xl bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                                <div className="rounded-xl bg-white px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                                     <button
                                         type="button"
                                         className="w-full mt-4 inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-blue-700 sm:ml-3 sm:w-auto sm:text-sm"

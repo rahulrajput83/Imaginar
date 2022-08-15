@@ -25,7 +25,7 @@ export default function Update(props) {
                                 <div className="mt-2 w-full flex justify-center items-center">
                                     <input onChange={onTitleChange} name='fullName' value={editTitle} placeholder='Write Something...' className='text-sm text-black w-11/12 outline-none py-2.5 px-3 bg-slate-100 rounded' type='text' />
                                 </div>
-                                <div className="rounded-xl bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                                <div className="rounded-xl bg-white px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                                     <button
                                         type="button"
                                         className="w-full mt-4 inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 sm:ml-3 sm:w-auto sm:text-sm"

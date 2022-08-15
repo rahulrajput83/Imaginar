@@ -28,7 +28,6 @@ function Home() {
         let file = e.target.files[0];
         setFileToBase(file);
         e.target.value = ''
-
     }
     const setFileToBase = (file) => {
         if (!file) {
@@ -46,7 +45,7 @@ function Home() {
 
     const deleteImg = () => {
         setPreview('');
-        setPostData({...postData, img: ''})
+        setPostData({ ...postData, img: '' })
     }
 
     const handleInputCLick = () => {
@@ -132,7 +131,7 @@ function Home() {
                 <Link to='/'>
                     <div className='font-bold uppercase text-xl md:text-2xl'>imaginar</div>
                 </Link>
-                <Link to='/account'>
+                <Link to={`users/${user}`}>
                     <button className='text-blue-700 bg-blue-100 hover:bg-blue-50 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 inline-flex items-center'>Account</button>
                 </Link>
             </div>
@@ -171,11 +170,11 @@ function Home() {
                         {
                             Data.map((data, index) => {
                                 return (
-                                    <Link to={`/posts/${data._id}`} key={index} className='rounded-lg shadow-lg bg-white mt-5 pt-3 w-full pb-0 bg-white flex flex-col'>
+                                    <div key={index} className='rounded-lg shadow-lg bg-white mt-5 pt-3 w-full pb-0 bg-white flex flex-col'>
                                         <div className='flex flex-row items-center'>
                                             <img className='ml-3 w-8 h-8 mr-4' src={profilelogo} alt='profile' />
                                             <div className='flex flex-col justify-center items-center'>
-                                                <div className='w-full text-left text-sm'><span className='font-medium text-blue-800 mr-1 text-left'>{data.authorName}</span>has added an post.</div>
+                                                <div className='w-full text-left text-sm'><Link to={`/users/${data.author}`} className='font-medium text-blue-800 mr-1 text-left'>{data.authorName}</Link>has added an post.</div>
                                                 <div className='w-full flex flex-row justify-start items-start'>
                                                     <div className='text-xs text-slate-400 mr-3 flex justify-center items-center'><FaRegCalendar className='mr-1' />
                                                         {new Date(data.date).toLocaleString("en-US", { timeZone: 'Asia/Kolkata' })}
@@ -184,14 +183,15 @@ function Home() {
                                                 </div>
                                             </div>
                                         </div>
-
-                                        <div className='px-3 w-full py-2 text-justify break-all text-sm'>{data.title}</div>
-                                        {
-                                            data.img ? <div className='flex flex-row w-full h-48 md:h-96 bg-white justify-center overflow-hidden items-center'>
-                                                <img className='object-cover cursor-pointer h-full w-full bg-white' src={data.img} alt={data.title} />
-                                            </div> : null
-                                        }
-                                    </Link>
+                                        <Link to={`/posts/${data._id}`} className='w-full'>
+                                            <div className='px-3 w-full py-2 text-justify break-all text-sm'>{data.title}</div>
+                                            {
+                                                data.img ? <div className='flex flex-row w-full h-48 md:h-96 bg-white justify-center overflow-hidden items-center'>
+                                                    <img className='object-cover cursor-pointer h-full w-full bg-white' src={data.img} alt={data.title} />
+                                                </div> : null
+                                            }
+                                        </Link>
+                                    </div>
                                 )
                             })
                         }
