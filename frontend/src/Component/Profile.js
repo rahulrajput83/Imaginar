@@ -225,29 +225,33 @@ function Profile() {
                                     account ? <>
                                         <div className='translate-y-8 my-10 justify-center items-center flex flex-row relative'>
                                             {
-                                                account.profileImg !== 'Not Added Yet' ? 
-                                                <img className='w-24 border-blue-800' src={account.profileImg} alt='' />
-                                                :
-                                                <img className='w-24 border-blue-800' src={profilePreview} alt='' />
+                                                account.profileImg !== 'Not Added Yet' ?
+                                                    <img className='w-24 border-blue-800' src={account.profileImg} alt='' />
+                                                    :
+                                                    <img className='w-24 border-blue-800' src={profilePreview} alt='' />
                                             }
-                                            
+
                                             {
-                                                unique === user ? 
-                                                <Camera setShowAvatar={setShowAvatar} showAvatar={showAvatar} />
-                                                :
-                                                null
+                                                unique === user ?
+                                                    <Camera setShowAvatar={setShowAvatar} showAvatar={showAvatar} />
+                                                    :
+                                                    null
                                             }
                                         </div>
                                         <div className='mt-4 w-full text-center font-bold text-xl uppercase'>{account.fullName}</div>
                                         <div className='mt-6 flex flex-col w-full items-center'>
-                                            {/* <div className='w-11/12 flex justify-start items-center'>
-                                                <div className="flex flex-row items-center justify-center h-10 w-10 rounded-full bg-gray-300 sm:mx-0 sm:h-10 sm:w-10">
-                                                    <MdOutlineEmail className="h-5 w-5 text-slate-800" />
-                                                </div>
-                                                <span className='ml-2 text-sm text-black'>
-                                                    {account.email}
-                                                </span>
-                                            </div> */}
+                                            {
+                                                unique === user ?
+                                                    <div className='w-11/12 flex justify-start items-center'>
+                                                        <div className="flex flex-row items-center justify-center h-10 w-10 rounded-full bg-gray-300 sm:mx-0 sm:h-10 sm:w-10">
+                                                            <MdOutlineEmail className="h-5 w-5 text-slate-800" />
+                                                        </div>
+                                                        <span className='ml-2 text-sm text-black'>
+                                                            {account.email}
+                                                        </span>
+                                                    </div>
+                                                    : null
+                                            }
                                             <div className='mt-2 mb-6 w-11/12 flex justify-start items-center'>
                                                 <div className="flex flex-row items-center justify-center h-10 w-10 rounded-full bg-gray-300 sm:mx-0 sm:h-10 sm:w-10">
                                                     <MdDateRange className="h-5 w-5 text-slate-800" />
@@ -278,12 +282,12 @@ function Profile() {
                                             <Link to={`/posts/${data._id}`} className='rounded-lg shadow-lg bg-white mt-5 pt-3 w-full flex flex-col'>
                                                 <div className='flex flex-row items-center'>
                                                     {
-                                                        account.profileImg !== 'Not Added Yet' ? 
-                                                        <img className='ml-3 w-8 h-8 mr-4' src={account.profileImg} alt='profile' />
-                                                        :
-                                                        <img className='ml-3 w-8 h-8 mr-4' src={profilelogo} alt='profile' />
+                                                        account.profileImg !== 'Not Added Yet' ?
+                                                            <img className='ml-3 w-8 h-8 mr-4' src={account.profileImg} alt='profile' />
+                                                            :
+                                                            <img className='ml-3 w-8 h-8 mr-4' src={profilelogo} alt='profile' />
                                                     }
-                                                    
+
                                                     <div className='flex flex-col justify-center items-center'>
                                                         <div className='w-full text-left text-sm'><span className='font-medium text-blue-800 mr-1 text-left'>{data.authorName}</span>has added an post.</div>
                                                         <div className='w-full flex flex-row justify-start items-start'>

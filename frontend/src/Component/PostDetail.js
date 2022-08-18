@@ -162,80 +162,91 @@ function PostDetail() {
                         <div className='items-center flex flex-col w-full md:w-5/12 mt-5 rounded shadow-xl shadow-slate-200 mb-10'>
                             <div className='pt-3 w-full bg-white flex flex-col'>
                                 {
-                                    data.authorName ? <><div className='flex flex-row items-center'>
-                                        <img className='ml-3 w-8 h-8 mr-4' src={profilelogo} alt='profile' />
-                                        <div className='flex flex-col justify-center items-center'>
-                                            <div className='w-full text-left text-sm'><span className='font-medium text-blue-800 mr-1'>{data.authorName}</span>has added an post.</div>
-                                            <div className='w-full flex flex-row justify-start items-start'>
-                                                <div className='text-xs text-slate-400 mr-3 flex justify-center items-center'><FaRegCalendar className='mr-1' />
-                                                    {new Date((data.date)).toLocaleString("en-US", { timeZone: 'Asia/Kolkata' })}
+                                    data !== null ?
+                                        <>
+                                            <div className='flex flex-row items-center'>
+                                                <img className='ml-3 w-8 h-8 mr-4' src={profilelogo} alt='profile' />
+                                                <div className='flex flex-col justify-center items-center'>
+                                                    <div className='w-full text-left text-sm'><span className='font-medium text-blue-800 mr-1'>{data.authorName}</span>has added an post.</div>
+                                                    <div className='w-full flex flex-row justify-start items-start'>
+                                                        <div className='text-xs text-slate-400 mr-3 flex justify-center items-center'><FaRegCalendar className='mr-1' />
+                                                            {new Date((data.date)).toLocaleString("en-US", { timeZone: 'Asia/Kolkata' })}
+                                                        </div>
+                                                        <div className='text-xs text-slate-400 flex justify-center items-center'><FaGlobeAsia className='mr-1' />Public</div>
+                                                    </div>
                                                 </div>
-                                                <div className='text-xs text-slate-400 flex justify-center items-center'><FaGlobeAsia className='mr-1' />Public</div>
                                             </div>
-                                        </div>
-                                    </div>
-                                        <div className='px-3 w-full py-2 break-all text-sm'>{data.title}</div></> : <span className='text-sm text-center'>Something, went wrong..</span>
-                                }
+                                            <div className='px-3 w-full py-2 break-all text-sm'>{data.title}</div>
+                                            {
+                                                data.img ? <div className='flex flex-row w-full h-48 md:h-96 bg-white justify-center overflow-hidden items-center'>
+                                                    <img className='object-cover h-full w-full bg-white' src={data.img} alt={data.title} />
+                                                </div> : null
+                                            }
 
-                                {
-                                    data.img ? <div className='flex flex-row w-full h-48 md:h-96 bg-white justify-center overflow-hidden items-center'>
-                                        <img className='object-cover h-full w-full bg-white' src={data.img} alt={data.title} />
-                                    </div> : null
-                                }
-                                <div className='w-full justify-around p-1 items-center flex flex-row'>
-                                    {/* <div className='flex p-2 text-blue-800 flex-row justify-center items-center'>
+                                            <div className='w-full justify-around p-1 items-center flex flex-row'>
+                                                {/* <div className='flex p-2 text-blue-800 flex-row justify-center items-center'>
                                         <FaRegThumbsUp className='text-lg mr-2' />
                                         <span className=''>{data.like}</span>
                                     </div> */}
-                                    <div className='flex p-2 text-blue-800 flex-row justify-center items-center'>
-                                        <FaRegCommentAlt className='text-lg mr-2' />
-                                        <span className=''>{commentLength}</span>
-                                    </div>
-                                    <div className='flex p-2 text-blue-800 flex-row justify-center items-center'>
-                                        <FaShare onClick={() => setOpen(true)} className='text-lg cursor-pointer' />
-                                        <Share open={open} setOpen={setOpen} />
-                                    </div>
-                                </div>
-                            </div>
-                            <div className='w-full px-4 py-2 w-full flex flex-col'>
-                                {
-                                    user ?
-                                        <div className='w-full bg-blue-50 rounded-3xl flex flex-row items-center'>
-                                            <input value={newComment.title} onChange={handleChange} name='title' placeholder='Add Comment here...' className='placeholder-gray-500 text-sm bg-transparent w-full outline-none py-2.5 px-4' type='text' />
-                                            <div className='mr-4 flex cursor-pointer text-blue-800 flex-row justify-center items-center'>
-                                                <BiSend onClick={handleSubmit} className='text-lg' />
+                                                <div className='flex p-2 text-blue-800 flex-row justify-center items-center'>
+                                                    <FaRegCommentAlt className='text-lg mr-2' />
+                                                    <span className=''>{commentLength}</span>
+                                                </div>
+                                                <div className='flex p-2 text-blue-800 flex-row justify-center items-center'>
+                                                    <FaShare onClick={() => setOpen(true)} className='text-lg cursor-pointer' />
+                                                    <Share open={open} setOpen={setOpen} />
+                                                </div>
                                             </div>
-                                        </div> : <div className='w-full flex flex-row items-center justify-center py-5 font-medium text-sm text-slate-800'>
-                                            <span className='mr-1'>Please</span>
-                                            <Link className='text-blue-800' to='/signin'>login</Link>
-                                            <span className='ml-1'>to comment to this post.</span></div>
+                                        </> : <span className='text-sm text-center'>No post found..</span>
                                 }
-                                {
-                                    comments ? <div className='my-5 w-full flex flex-col'>
-                                        {
-                                            comments.map((item, index) => {
-                                                return (
-                                                    <div key={index} className='flex flex-col my-2'>
-                                                        <div className='flex flex-row items-center'>
-                                                            <img className='ml-3 w-8 h-8 mr-4' src={profilelogo} alt='profile' />
-                                                            <div className='flex flex-col justify-start items-center'>
-                                                                <div className='text-sm  w-full break-all'><span className='font-medium text-blue-800 mr-1'>{item.authorName}</span></div>
-                                                                <div className='w-full flex flex-row justify-start items-start'>
-                                                                    <div className='text-[11px] text-slate-400 mr-3 flex justify-center items-center'><FaRegCalendar className='mr-1' />
-                                                                        {new Date(item.date).toLocaleString("en-US", { timeZone: 'Asia/Kolkata' })}
-                                                                    </div>
 
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div className='ml-14 pl-1 mr-1 w-fit break-all text-sm'>{item.comment}</div>
-                                                    </div>
-                                                )
-                                            })
-                                        }
-                                    </div> : null
-                                }
+
+
                             </div>
+                            {
+                                data !== null ?
+
+                                    <div className='w-full px-4 py-2 w-full flex flex-col'>
+                                        {
+                                            user ?
+                                                <div className='w-full bg-blue-50 rounded-3xl flex flex-row items-center'>
+                                                    <input value={newComment.title} onChange={handleChange} name='title' placeholder='Add Comment here...' className='placeholder-gray-500 text-sm bg-transparent w-full outline-none py-2.5 px-4' type='text' />
+                                                    <div className='mr-4 flex cursor-pointer text-blue-800 flex-row justify-center items-center'>
+                                                        <BiSend onClick={handleSubmit} className='text-lg' />
+                                                    </div>
+                                                </div> : <div className='w-full flex flex-row items-center justify-center py-5 font-medium text-sm text-slate-800'>
+                                                    <span className='mr-1'>Please</span>
+                                                    <Link className='text-blue-800' to='/signin'>login</Link>
+                                                    <span className='ml-1'>to comment to this post.</span></div>
+                                        }
+                                        {
+                                            comments ? <div className='my-5 w-full flex flex-col'>
+                                                {
+                                                    comments.map((item, index) => {
+                                                        return (
+                                                            <div key={index} className='flex flex-col my-2'>
+                                                                <div className='flex flex-row items-center'>
+                                                                    <img className='ml-3 w-8 h-8 mr-4' src={profilelogo} alt='profile' />
+                                                                    <div className='flex flex-col justify-start items-center'>
+                                                                        <div className='text-sm  w-full break-all'><span className='font-medium text-blue-800 mr-1'>{item.authorName}</span></div>
+                                                                        <div className='w-full flex flex-row justify-start items-start'>
+                                                                            <div className='text-[11px] text-slate-400 mr-3 flex justify-center items-center'><FaRegCalendar className='mr-1' />
+                                                                                {new Date(item.date).toLocaleString("en-US", { timeZone: 'Asia/Kolkata' })}
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div className='ml-14 pl-1 mr-1 w-fit break-all text-sm'>{item.comment}</div>
+                                                            </div>
+                                                        )
+                                                    })
+                                                }
+                                            </div> : null
+                                        }
+                                    </div>
+                                    : null
+                            }
 
                         </div>
                 }
