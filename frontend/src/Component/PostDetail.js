@@ -162,7 +162,7 @@ function PostDetail() {
                         <div className='items-center flex flex-col w-full md:w-5/12 mt-5 rounded shadow-xl shadow-slate-200 mb-10'>
                             <div className='pt-3 w-full bg-white flex flex-col'>
                                 {
-                                    data !== null ?
+                                    data !== null && data !== undefined ?
                                         <>
                                             <div className='flex flex-row items-center'>
                                                 <img className='ml-3 w-8 h-8 mr-4' src={profilelogo} alt='profile' />
@@ -204,7 +204,7 @@ function PostDetail() {
 
                             </div>
                             {
-                                data !== null ?
+                                data !== null && data !== undefined ?
 
                                     <div className='w-full px-4 py-2 w-full flex flex-col'>
                                         {
