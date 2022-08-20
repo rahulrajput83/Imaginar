@@ -8,7 +8,15 @@ const SignupSchema = new mongoose.Schema({
     email: String,
     password: String,
     Joined: Number,
-    Bio: String
+    Bio: String,
+    CurrentCity: String,
+    HomeTown: String,
+    Relationship: String,
+    Website: String,
+    Facebook: String,
+    Instagram: String,
+    Twitter: String,
+    Linkedin: String,
 });
 
 
