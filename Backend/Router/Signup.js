@@ -10,7 +10,7 @@ router.post('/signup', (req, res) => {
         .then((result) => {
             data = result.filter(item => item.email === req.body.email)
             if (data.length >= 1) {
-                res.json({message: 'User Already Registered...'})
+                res.json({ message: 'User Already Registered...' })
             }
             else {
                 const signUpUser = new SignupUserSchema({
@@ -19,14 +19,22 @@ router.post('/signup', (req, res) => {
                     email: req.body.email,
                     password: req.body.password,
                     Joined: Date.now(),
-                    Bio: 'Not Added Yet'
+                    Bio: 'Not Added Yet',
+                    CurrentCity: '',
+                    HomeTown: '',
+                    Relationship: '',
+                    Website: '',
+                    Facebook: '',
+                    Instagram: '',
+                    Twitter: '',
+                    Linkedin: '',
                 })
                 signUpUser.save()
                     .then(data => {
-                        res.json({message: 'User Successfully Registered...'})
+                        res.json({ message: 'User Successfully Registered...' })
                     })
                     .catch(error => {
-                        res.json({message: 'Error, Please try again...'})
+                        res.json({ message: 'Error, Please try again...' })
                     })
             }
         })
