@@ -22,4 +22,23 @@ router.post('/profileimg', (req, res) => {
         });
 })
 
+router.post('/editaccount', (req, res) => {
+    SignupUserSchema.updateOne({ _id: req.body._id },
+        {
+            $set: {
+                'bioData': req.body.bioData,
+                'currentCity': req.body.currentCity,
+                'homeTown': req.body.homeTown,
+                'selectRelation': req.body.selectRelation,
+                'website': req.body.website,
+                'facebook': req.body.facebook,
+                'instagram': req.body.instagram,
+                'twitter': req.body.twitter,
+                'linkedin': req.body.linkedin,
+            }
+        })
+        .then(res.json({ message: 'Uploaded...' }))
+        .catch(res.json({ message: 'Error, Please try again...' }));
+})
+
 module.exports = router;

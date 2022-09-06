@@ -9,7 +9,7 @@ const routeComment = require('./Router/Comment')
 const routePostDetails = require('./Router/PostDetails');
 const fileUpload = require('express-fileupload');
 const UserPost = require('./Router/UserPost');
-const RouteProfileImg = require('./Router/ProfileImg')
+const RouteProfileImg = require('./Router/ProfileImg');
 
 
 /* Initializes express app. */

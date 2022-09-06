@@ -56,6 +56,8 @@ function Profile() {
                 setLoading(false)
             });
     }, [unique])
+    
+    
 
     const loadPost = useCallback(() => {
         fetch('https://imaginar.herokuapp.com/userpost', {
@@ -212,6 +214,7 @@ function Profile() {
                     <Link to='/' className='cursor-pointer absolute top-0 left-0 ml-6 mt-4'>
                         <FaChevronLeft />
                     </Link>
+
                     {
                         loading ? <>
                             <svg role="status" className="inline mr-3 w-10 h-10 text-blue-500 animate-spin" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -223,6 +226,13 @@ function Profile() {
                             <>
                                 {
                                     account ? <>
+                                        {
+                                            unique === user ?
+                                                <Link to='/edit' className='cursor-pointer absolute top-0 right-5 mt-2'>
+                                                    <button className='text-white bg-blue-700 hover:bg-blue-800 disabled:cursor-not-allowed font-medium rounded-lg text-sm px-6 py-2 text-center mr-2 inline-flex items-center'>Edit</button>
+                                                </Link>
+                                                : null
+                                        }
                                         <div className='translate-y-8 my-10 justify-center items-center flex flex-row relative'>
                                             {
                                                 account.profileImg !== 'Not Added Yet' ?

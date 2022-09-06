@@ -6,6 +6,7 @@ import Profile from './Component/Profile';
 import Signin from './Component/Signin';
 import Signup from './Component/Signup';
 import { useSelector } from 'react-redux';
+import Edit from './Component/Edit';
 
 
 const Private = ({ user, children }) => {
@@ -35,6 +36,7 @@ function App() {
         <Route path='/users/:unique' element={<Profile />} />
         <Route path='/posts/:uniqueid' element={<PostDetail />} />
         <Route path='/about' element={<About />} />
+        <Route path='/edit' element={<Private user={user} ><Edit /></Private>} />
       </Routes>
     </BrowserRouter>
   );
