@@ -11,9 +11,9 @@ function Signup() {
     const [fullnameInvalid, setFullNameInvalid] = useState(false);
 
     const [registerData, setRegisterData] = useState({
-        fullName: 'urgrt',
-        email: 'ougy',
-        password: 'igfhygr'
+        fullName: '',
+        email: '',
+        password: ''
     })
 
     const onChange = (e) => {
