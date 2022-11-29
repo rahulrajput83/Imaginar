@@ -66,7 +66,7 @@ function Home() {
             setErrorMessage('Posting...')
             setTimeout(() => setError(false), 2500);
             setSubmitDisabled(true);
-            fetch('https://imaginar.herokuapp.com/post', {
+            fetch(`${process.env.REACT_APP_BACKEND_URL}/post`, {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
@@ -104,7 +104,7 @@ function Home() {
 
     const loadData = () => {
         setLoading(true);
-        fetch('https://imaginar.herokuapp.com/post', {
+        fetch(`${process.env.REACT_APP_BACKEND_URL}/post`, {
             method: 'GET'
         })
             .then(response => response.json())
@@ -170,7 +170,7 @@ function Home() {
                         {
                             Data.map((data, index) => {
                                 return (
-                                    <div key={index} className='rounded-lg shadow-lg bg-white mt-5 pt-3 w-full pb-0 bg-white flex flex-col'>
+                                    <div key={index} className='rounded-lg shadow-lg mt-5 pt-3 w-full pb-0 bg-white flex flex-col'>
                                         <div className='flex flex-row items-center'>
                                             <img className='ml-3 w-8 h-8 mr-4' src={profilelogo} alt='profile' />
                                             <div className='flex flex-col justify-center items-center'>
@@ -197,7 +197,7 @@ function Home() {
                         }
                     </div>
                 </div>
-                <div className='shadow-lg text-slate-300 bg-white w-80 h-80 hidden md:flex shadow-white-800 my-4 rounded-lg p-3 flex flex-col justify-center items-center'>
+                <div className='shadow-lg text-slate-300 bg-white w-80 h-80 hidden md:flex shadow-white-800 my-4 rounded-lg p-3 flex-col justify-center items-center'>
                     Advertisement Here
                 </div>
             </div>

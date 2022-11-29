@@ -36,7 +36,7 @@ function PostDetail() {
             setError(true);
             setAlertMessage('Posting ...')
             setTimeout(() => setError(false), 2500);
-            fetch('https://imaginar.herokuapp.com/postComment', {
+            fetch(`${process.env.REACT_APP_BACKEND_URL}/postComment`, {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
@@ -67,7 +67,7 @@ function PostDetail() {
     }
 
     const loadComments = useCallback(() => {
-        fetch('https://imaginar.herokuapp.com/comments', {
+        fetch(`${process.env.REACT_APP_BACKEND_URL}/comments`, {
             method: 'GET'
         })
             .then(response => response.json())
@@ -83,7 +83,7 @@ function PostDetail() {
 
     const loadData = useCallback(() => {
         setLoading(true);
-        fetch('https://imaginar.herokuapp.com/postdetails', {
+        fetch(`${process.env.REACT_APP_BACKEND_URL}/postdetails`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -131,7 +131,7 @@ function PostDetail() {
                 </div> : null
             }
             <div className='flex flex-row w-full justify-around items-start'>
-                <div className='shadow-lg bg-white w-80 hidden md:flex shadow-white-800 my-4 rounded-lg p-3 flex flex-col justify-center items-center'>
+                <div className='shadow-lg bg-white w-80 hidden md:flex shadow-white-800 my-4 rounded-lg p-3 flex-col justify-center items-center'>
                     <div className='mt-4 uppercase font-bold'>Rahul Rajput</div>
                     <div className='text-sm text-slate-500'>Frontend Developer | MERN Developer</div>
                     <div className='no-underline flex mb-10 mt-5 flex-row justify-center animate-rotate'>
@@ -206,7 +206,7 @@ function PostDetail() {
                             {
                                 data !== null && data !== undefined ?
 
-                                    <div className='w-full px-4 py-2 w-full flex flex-col'>
+                                    <div className='w-full px-4 py-2 flex flex-col'>
                                         {
                                             user ?
                                                 <div className='w-full bg-blue-50 rounded-3xl flex flex-row items-center'>
@@ -250,7 +250,7 @@ function PostDetail() {
 
                         </div>
                 }
-                <div className='shadow-lg text-slate-300 bg-white w-80 h-80 hidden md:flex shadow-white-800 my-4 rounded-lg p-3 flex flex-col justify-center items-center'>
+                <div className='shadow-lg text-slate-300 bg-white w-80 h-80 hidden md:flex shadow-white-800 my-4 rounded-lg p-3 flex-col justify-center items-center'>
                     Advertisement Here
                 </div>
             </div>

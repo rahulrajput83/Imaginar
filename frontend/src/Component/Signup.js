@@ -38,7 +38,7 @@ function Signup() {
     const handleSubmit = (e) => {
         setButtonDisabled(true)
         e.preventDefault();
-        fetch('https://imaginar.herokuapp.com/signup', {
+        fetch(`${process.env.REACT_APP_BACKEND_URL}/signup`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',

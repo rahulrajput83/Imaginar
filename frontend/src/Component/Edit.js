@@ -34,7 +34,7 @@ function Edit() {
     const SubmitData = (e) => {
         e.preventDefault();
         setSaveBtn('Saving');
-        fetch('http://localhost:2850/editaccount', {
+        fetch(`${process.env.REACT_APP_BACKEND_URL}/editaccount`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -54,7 +54,7 @@ function Edit() {
     }
 
     const loadAccount = useCallback(() => {
-        fetch('https://imaginar.herokuapp.com/account', {
+        fetch(`${process.env.REACT_APP_BACKEND_URL}/account`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -169,7 +169,7 @@ function Edit() {
             </div>
 
 
-            <div className='shadow-lg bg-white w-3/12 hidden md:flex shadow-white-800 my-4 rounded-lg p-3 flex flex-col justify-center items-center'>
+            <div className='shadow-lg bg-white w-3/12 hidden md:flex shadow-white-800 my-4 rounded-lg p-3 flex-col justify-center items-center'>
                 <a href="https://github.com/rahulrajput83/Imaginar" target="_blank" rel="noopener noreferrer">
                     <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/rahulrajput83/Imaginar?style=for-the-badge" />
                 </a>

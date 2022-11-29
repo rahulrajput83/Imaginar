@@ -37,7 +37,7 @@ function Profile() {
 
 
     const loadAccount = useCallback(() => {
-        fetch('https://imaginar.herokuapp.com/account', {
+        fetch(`${process.env.REACT_APP_BACKEND_URL}/account`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -60,7 +60,7 @@ function Profile() {
     
 
     const loadPost = useCallback(() => {
-        fetch('https://imaginar.herokuapp.com/userpost', {
+        fetch(`${process.env.REACT_APP_BACKEND_URL}/userpost`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -114,7 +114,7 @@ function Profile() {
         setAlertMessage('Updating...');
         setError(true);
         setTimeout(() => setError(false), 2500);
-        fetch('https://imaginar.herokuapp.com/update', {
+        fetch(`${process.env.REACT_APP_BACKEND_URL}/update`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -140,7 +140,7 @@ function Profile() {
         setAlertMessage('Deleting...');
         setError(true);
         setTimeout(() => setError(false), 2500);
-        fetch('https://imaginar.herokuapp.com/delete', {
+        fetch(`${process.env.REACT_APP_BACKEND_URL}/delete`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -163,7 +163,7 @@ function Profile() {
     const uploadProfile = (imageData) => {
         setBtnDisable(true);
         setBtnText('Uploading, Please wait...')
-        fetch('https://imaginar.herokuapp.com/profileimg', {
+        fetch(`${process.env.REACT_APP_BACKEND_URL}/profileimg`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
